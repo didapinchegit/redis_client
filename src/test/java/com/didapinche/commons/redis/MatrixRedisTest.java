@@ -53,7 +53,7 @@ public class MatrixRedisTest extends RedisTestBase {
     }
 
     @Test
-    public void switchMaster(){
+    public void testSwitchMaster(){
 //        MatrixRedisPool pool =  (MatrixRedisPool)matrixRedisClient.getRedisPool();
 //        ShardedJedis masterShardedJedis = pool.getMasterResource();
 //        ShardedJedis slaveShardedJedis = pool.getSlaveResource();
