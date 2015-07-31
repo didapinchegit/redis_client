@@ -13,10 +13,5 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
  *
  * Copyright 2015 didapinche.com
  */
-@ContextConfiguration(locations = {"classpath*:spring.xml"})
 public class RedisTestBase extends AbstractJUnit4SpringContextTests {
-
-
-
-
 }

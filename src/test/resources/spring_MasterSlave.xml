@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="10"/>
+    </bean>
+
+    <bean id="masterSlaveRedisPool" class="com.didapinche.commons.redis.MasterSlaveRedisPool">
+        <property name="jedisPoolConfig" ref="jedisPoolConfig"></property>
+        <property name="masterHap">
+            <bean class="redis.clients.jedis.HostAndPort">
+                <constructor-arg name="host" value="127.0.0.1"/>
+                <constructor-arg name="port" value="6379"/>
+            </bean>
+        </property>
+        <property name="slaveHaps">
+            <list>
+                <bean class="redis.clients.jedis.HostAndPort">
+                    <constructor-arg name="host" value="127.0.0.1"/>
+                    <constructor-arg name="port" value="6380"/>
+                </bean>
+                <bean class="redis.clients.jedis.HostAndPort">
+                    <constructor-arg name="host" value="127.0.0.1"/>
+                    <constructor-arg name="port" value="6381"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="client" class="com.didapinche.commons.redis.MasterSlaveRedisClient">
+        <property name="pool" ref="masterSlaveRedisPool"></property>
+    </bean>
+
+
+    <!--sentinel-->
+
+
+
+    <bean id="masterSlaveRedisPoolWithSentinel" class="com.didapinche.commons.redis.MasterSlaveRedisPool">
+        <property name="jedisPoolConfig" ref="jedisPoolConfig"></property>
+    </bean>
+
+
+    <bean id="clientWithSentinel" class="com.didapinche.commons.redis.MasterSlaveRedisClient">
+        <property name="pool" ref="masterSlaveRedisPoolWithSentinel"></property>
+    </bean>
+
+    <bean id ="sentinelsManager" class="com.didapinche.commons.redis.sentinel.SentinelsManager" lazy-init="true">
+        <property name="reidsPool" ref="masterSlaveRedisPoolWithSentinel"></property>
+        <property name="sentinelInfo">
+            <bean class="com.didapinche.commons.redis.sentinel.SentinelInfo">
+                <property name="masterNames" >
+                    <list>
+                        <value>master1</value>
+                    </list>
+                </property>
+                <property name="sentinels">
+                    <set>
+                        <value>127.0.0.1:26379</value>
+                        <value>127.0.0.1:26380</value>
+                        <value>127.0.0.1:26381</value>
+                    </set>
+                </property>
+
+                <property name="weight" value="1"></property>
+                <property name="password" value="" ></property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="sentinelJedis" class="redis.clients.jedis.Jedis" lazy-init="true">
+        <constructor-arg name="host" value="127.0.0.1"/>
+        <constructor-arg name="port" value="26379"/>
+    </bean>
+
+
+
+</beans>

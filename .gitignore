@@ -6,3 +6,5 @@
 /*.iml
 /.idea
 /.svn
+
+src/test/redisconf

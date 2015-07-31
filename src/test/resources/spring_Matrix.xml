@@ -13,21 +13,6 @@
         <property name="maxIdle" value="10"/>
     </bean>
 
-
-
-    <!--<bean id="masterSlaveRedisPool" class="com.didapinche.commons.redis.MasterSlaveRedisPool">-->
-        <!--<property name="jedisPoolConfig" ref="jedisPoolConfig"></property>-->
-        <!-- -->
-    <!--</bean>-->
-
-
-    <!--<bean id="masterSlaveRedisClient" class="com.didapinche.commons.redis.MasterSlaveRedisClient">-->
-        <!--<property name="pool" ref="masterSlaveRedisPool"></property>-->
-    <!--</bean>-->
-
-
-
-
     <bean id="muiltRedisPool" class="com.didapinche.commons.redis.MatrixRedisPool">
         <property name="jedisPoolConfig" ref="jedisPoolConfig"></property>
         <!--<property name="masterShards">-->
@@ -79,13 +64,9 @@
         <!--</property>-->
     </bean>
 
-
-
-
     <bean id="matrixRedisClient" class="com.didapinche.commons.redis.MatrixRedisClient">
         <property name="redisPool" ref="muiltRedisPool"></property>
     </bean>
-
 
     <bean id ="sentinelsManager" class="com.didapinche.commons.redis.sentinel.SentinelsManager">
         <property name="reidsPool" ref="muiltRedisPool"></property>
@@ -110,7 +91,5 @@
             </bean>
         </property>
     </bean>
-
-
 
 </beans>

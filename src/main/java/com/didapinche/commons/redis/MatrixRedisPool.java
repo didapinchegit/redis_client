@@ -170,8 +170,6 @@ public class MatrixRedisPool implements RedisPool<ShardedJedis>, InitializingBea
             }
         }
 
-
-
         initSlavePool();
     }
 
