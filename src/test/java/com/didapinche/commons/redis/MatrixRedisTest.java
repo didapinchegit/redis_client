@@ -14,7 +14,7 @@ import java.util.*;
  * Created by fengbin on 15/7/20.
  */
 
-@ContextConfiguration(locations = {"classpath*:spring.xml"})
+@ContextConfiguration(locations = {"classpath*:spring_Matrix.xml"})
 public class MatrixRedisTest extends RedisTestBase {
 
     @Autowired

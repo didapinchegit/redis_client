@@ -69,6 +69,7 @@ public class SentinelsManager implements InitializingBean{
                     slaveHaps = new ArrayList<>();
                     for(Map<String,String>slaveInfo : slaveInfos) {
 
+                        //下线状态的slave也会查出来，跳过下线状态的
                         String sdownTime = slaveInfo.get("s-down-time");
                         if(!(sdownTime == null || "0".equals(sdownTime))){
                             continue;
