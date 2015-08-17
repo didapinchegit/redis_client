@@ -1444,4 +1444,23 @@ public abstract class AbstractRedisClient implements RedisClient{
             }
         });
     }
+
+    @Override
+    public Pipeline pipelined() {
+        return execute(new CallBack<Pipeline>(){
+            @Override
+            public Pipeline execute(JedisCommands jedis) {
+                if(jedis instanceof Jedis) {
+                    Pipeline pipeline = new Pipeline();
+                    pipeline.setClient(((Jedis)jedis).getClient());
+                    return pipeline;
+                }else {
+                    return null;
+                }
+
+            }
+        });
+    }
+
+
 }

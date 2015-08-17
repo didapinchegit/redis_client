@@ -2,6 +2,7 @@ package com.didapinche.commons.redis;
 
 import redis.clients.jedis.JedisCommands;
 import redis.clients.jedis.MultiKeyCommands;
+import redis.clients.jedis.Pipeline;
 
 
 /**
@@ -14,4 +15,7 @@ import redis.clients.jedis.MultiKeyCommands;
  */
 public interface RedisClient extends JedisCommands,MultiKeyCommands {
     Double hincrByFloat(final String key, final String field, final double value);
+
+    Pipeline pipelined();
+
 }

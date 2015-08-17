@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.Pipeline;
 
 import java.util.List;
 import java.util.Map;
@@ -94,5 +95,31 @@ public class MasterSlaveRedisTest extends RedisTestBase {
         Assert.assertEquals(0,slavesHap.size());
     }
 
+    @Test
+    public void testbigPipe() throws InterruptedException {
+
+        Pipeline pl = client.pipelined();
+        pl.set("a","1");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(client.get("a"));
+            }
+        }).start();
+
+
+        Thread.currentThread().sleep(10000l);
+        pl.set("b","2");
+        pl.sync();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println(client.get("a"));
+            }
+        }).start();
+        Thread.currentThread().sleep(10000l);
+
+
+    }
 
 }

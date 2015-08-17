@@ -21,6 +21,26 @@ public class MatrixRedisTest extends RedisTestBase {
     protected MatrixRedisClient matrixRedisClient;
 
     /**
+     * 1master 2slave
+     */
+    @Test
+    public void testBasicReadWrite() throws InterruptedException {
+        String key = "key";
+        String value = "value";
+        matrixRedisClient.set(key, value);
+        Assert.assertEquals(value, matrixRedisClient.get(key));
+
+        matrixRedisClient.pexpire(key, 100);
+        Assert.assertTrue(matrixRedisClient.exists(key));
+
+        //主从复制有延时
+        Thread.sleep(200);
+
+        Assert.assertFalse(matrixRedisClient.exists(key));
+
+    }
+
+    /**
      * master1 集群3个，master2 集群3个
      */
     @Test
