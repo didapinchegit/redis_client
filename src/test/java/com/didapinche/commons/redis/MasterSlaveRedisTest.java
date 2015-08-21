@@ -100,17 +100,11 @@ public class MasterSlaveRedisTest extends RedisTestBase {
 
         Pipeline pl = client.pipelined();
         pl.set("a","1");
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println(client.get("a"));
-            }
-        }).start();
 
-
-        Thread.currentThread().sleep(10000l);
         pl.set("b","2");
         pl.sync();
+
+
         new Thread(new Runnable() {
             @Override
             public void run() {

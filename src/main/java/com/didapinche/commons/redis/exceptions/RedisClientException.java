@@ -12,4 +12,8 @@ public class RedisClientException extends RuntimeException {
     public RedisClientException(String msg){
          super(msg);
     }
+
+    public RedisClientException(String msg,Throwable e){
+        super(msg,e);
+    }
 }
