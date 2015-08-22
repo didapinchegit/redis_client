@@ -8,7 +8,7 @@
 	<name>com.didapinche.commons.redis</name>
 	<groupId>com.didapinche</groupId>
 	<description>com.didapinche.commons.redis</description>
-    <version>1.4.6-SNAPSHOT</version>
+    <version>1.4.7-SNAPSHOT</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.sourcejvm>1.7</project.build.sourcejvm>
