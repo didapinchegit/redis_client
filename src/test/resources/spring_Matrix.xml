@@ -15,53 +15,53 @@
 
     <bean id="muiltRedisPool" class="com.didapinche.commons.redis.MatrixRedisPool">
         <property name="jedisPoolConfig" ref="jedisPoolConfig"></property>
-        <!--<property name="masterShards">-->
-            <!--<map>-->
-                <!--<entry key="master1">-->
-                    <!--<bean class="redis.clients.jedis.JedisShardInfo">-->
-                        <!--<constructor-arg name="host" value="127.0.0.1"></constructor-arg>-->
-                        <!--<constructor-arg name="port" value="6379"></constructor-arg>-->
-                    <!--</bean>-->
-                <!--</entry>-->
-                <!--<entry key="master1">-->
-                    <!--<bean class="redis.clients.jedis.JedisShardInfo">-->
-                        <!--<constructor-arg name="host" value="127.0.0.1"></constructor-arg>-->
-                        <!--<constructor-arg name="port" value="7379"></constructor-arg>-->
-                    <!--</bean>-->
-                <!--</entry>-->
-            <!--</map>-->
-        <!--</property>-->
+        <property name="masterShards">
+            <map>
+                <entry key="master1">
+                    <bean class="redis.clients.jedis.JedisShardInfo">
+                        <constructor-arg name="host" value="127.0.0.1"></constructor-arg>
+                        <constructor-arg name="port" value="6379"></constructor-arg>
+                    </bean>
+                </entry>
+                <entry key="master1">
+                    <bean class="redis.clients.jedis.JedisShardInfo">
+                        <constructor-arg name="host" value="127.0.0.1"></constructor-arg>
+                        <constructor-arg name="port" value="7379"></constructor-arg>
+                    </bean>
+                </entry>
+            </map>
+        </property>
 
-        <!--<property name="multiSlaveShards">-->
-            <!--<map>-->
-                <!--<entry key="master1">-->
-                    <!--<list>-->
-                        <!--<bean class="redis.clients.jedis.JedisShardInfo">-->
-                            <!--<constructor-arg name="host" value="127.0.0.1"></constructor-arg>-->
-                            <!--<constructor-arg name="port" value="6380"></constructor-arg>-->
-                        <!--</bean>-->
-                        <!--<bean class="redis.clients.jedis.JedisShardInfo">-->
-                            <!--<constructor-arg name="host" value="127.0.0.1"></constructor-arg>-->
-                            <!--<constructor-arg name="port" value="6381"></constructor-arg>-->
-                        <!--</bean>-->
-                    <!--</list>-->
-                <!--</entry>-->
+        <property name="multiSlaveShards">
+            <map>
+                <entry key="master1">
+                    <list>
+                        <bean class="redis.clients.jedis.JedisShardInfo">
+                            <constructor-arg name="host" value="127.0.0.1"></constructor-arg>
+                            <constructor-arg name="port" value="6380"></constructor-arg>
+                        </bean>
+                        <bean class="redis.clients.jedis.JedisShardInfo">
+                            <constructor-arg name="host" value="127.0.0.1"></constructor-arg>
+                            <constructor-arg name="port" value="6381"></constructor-arg>
+                        </bean>
+                    </list>
+                </entry>
 
-                <!--<entry key="master2">-->
-                    <!--<list>-->
-                        <!--<bean class="redis.clients.jedis.JedisShardInfo">-->
-                            <!--<constructor-arg name="host" value="127.0.0.1"></constructor-arg>-->
-                            <!--<constructor-arg name="port" value="7380"></constructor-arg>-->
-                        <!--</bean>-->
-                        <!--<bean class="redis.clients.jedis.JedisShardInfo">-->
-                            <!--<constructor-arg name="host" value="127.0.0.1"></constructor-arg>-->
-                            <!--<constructor-arg name="port" value="7381"></constructor-arg>-->
-                        <!--</bean>-->
-                    <!--</list>-->
-                <!--</entry>-->
+                <entry key="master2">
+                    <list>
+                        <bean class="redis.clients.jedis.JedisShardInfo">
+                            <constructor-arg name="host" value="127.0.0.1"></constructor-arg>
+                            <constructor-arg name="port" value="7380"></constructor-arg>
+                        </bean>
+                        <bean class="redis.clients.jedis.JedisShardInfo">
+                            <constructor-arg name="host" value="127.0.0.1"></constructor-arg>
+                            <constructor-arg name="port" value="7381"></constructor-arg>
+                        </bean>
+                    </list>
+                </entry>
 
-            <!--</map>-->
-        <!--</property>-->
+            </map>
+        </property>
     </bean>
 
     <bean id="matrixRedisClient" class="com.didapinche.commons.redis.MatrixRedisClient">

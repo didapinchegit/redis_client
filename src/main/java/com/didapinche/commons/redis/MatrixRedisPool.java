@@ -32,9 +32,9 @@ public class MatrixRedisPool implements RedisPool<ShardedJedis>, InitializingBea
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        if (masterShardedJedisPool == null)
-            return;
-        initPool();
+        if (masterShards!= null) {
+            initPool();
+        }
     }
 
 
